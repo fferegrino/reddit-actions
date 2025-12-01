@@ -1,0 +1,40 @@
+name: Run Reddit Actions
+
+on:
+  schedule:
+    # Run every 2 days at midnight UTC
+    - cron: '0 0 */2 * *'
+  workflow_dispatch: # Allow manual triggering
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install UV
+        uses: astral-sh/setup-uv@v4
+        with:
+          version: "latest"
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: uv sync
+
+      - name: Run Reddit Actions
+        env:
+          REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
+          REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
+          REDDIT_USERNAME: ${{ secrets.REDDIT_USERNAME }}
+          REDDIT_PASSWORD: ${{ secrets.REDDIT_PASSWORD }}
+          REDDIT_USER_AGENT: ${{ secrets.REDDIT_USER_AGENT }}
+          INSTAPAPER_USER: ${{ secrets.INSTAPAPER_USER }}
+          INSTAPAPER_PASS: ${{ secrets.INSTAPAPER_PASS }}
+        run: uv run python main.py
+

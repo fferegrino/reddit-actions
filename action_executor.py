@@ -7,8 +7,6 @@ from praw.models import Submission
 
 from action import Action
 
-USER_AGENT = "RedditActions/0.1 by fferegrino"
-
 
 class ActionExecutor:
     """
@@ -45,7 +43,7 @@ class ActionExecutor:
         self.reddit = praw.Reddit(
             client_id=os.environ["REDDIT_CLIENT_ID"],
             client_secret=os.environ["REDDIT_CLIENT_SECRET"],
-            user_agent=USER_AGENT,
+            user_agent=os.environ["REDDIT_USER_AGENT"],
             username=os.environ["REDDIT_USERNAME"],
             password=os.environ["REDDIT_PASSWORD"],
         )
