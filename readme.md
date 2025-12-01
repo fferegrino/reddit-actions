@@ -21,3 +21,12 @@ REDDIT_CLIENT_SECRET=your_client_secret
 REDDIT_USERNAME=your_username
 REDDIT_PASSWORD=your_password
 ```
+
+### Instapaper API Credentials
+
+You don't need much to use Instapaper's API, just your username and password.
+
+```
+INSTAPAPER_USER=your_username
+INSTAPAPER_PASS=your_password
+```
